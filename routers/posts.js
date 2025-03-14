@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
+const arrayPosts = require('../data/posts_array')
 
 // Index
 router.get('/', (req, res) => {
-    res.send("Posts List")
+    res.json(arrayPosts)
 })
 
 // Show
 router.get('/:id', (req, res) => {
-    res.send(`Details of post with id: ${req.params.id}`)
+    res.json(arrayPosts[req.params.id - 1])
 })
 
 // Create
