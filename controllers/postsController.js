@@ -41,7 +41,36 @@ function modify(req, res) {
 }
 
 function destroy(req, res) {
-    res.send(`Delete post with id: ${req.params.id}`)
+    //res.send(`Delete post with id: ${req.params.id}`)
+
+    //Recupero l'ID dall'URL e lo trasformo in numero
+    const id = Number(req.params.id)
+
+    // Cerco il post tramite ID
+    const post = arrayPosts.find(post => post.id === id)
+
+    /* if (!post) {
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not Found",
+            message: " Post non trovato"
+        })
+    } */
+
+
+    if (post) {
+        res.status(204)       
+    }
+
+    // Rimuovo la pizza dall'array
+    arrayPosts.splice(arrayPosts.indexOf(post), 1)
+
+
+    // Stampo la lista aggiornata
+    console.log(arrayPosts);
+
 }
 
 module.exports = {
