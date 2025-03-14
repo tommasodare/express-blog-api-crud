@@ -1,7 +1,18 @@
 const arrayPosts = require('../data/posts_array')
 
-function index(req, res) { 
-    res.json(arrayPosts)
+function index(req, res) {
+
+    //res.json(arrayPosts)
+
+    // l'array filtrato inizialmente corrisponde a quello originale
+    let filteredArrayPosts = arrayPosts
+
+    // Se la richiesta contiene un filtro, allora filtriamo l'array
+    if (req.query.tag) {
+        filteredArrayPosts = arrayPosts.filter(post => post.tags.includes(req.query.tag))
+    }
+
+    res.json(filteredArrayPosts)
 }
 
 function show(req, res) {
