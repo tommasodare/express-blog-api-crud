@@ -23,3 +23,12 @@ function modify(req, res) {
 function destroy(req, res) {
     res.send(`Delete post with id: ${req.params.id}`)
 }
+
+module.exports = {
+    index,
+    show,
+    store,
+    update,
+    modify,
+    destroy
+}
