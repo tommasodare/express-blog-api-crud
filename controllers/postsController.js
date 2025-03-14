@@ -25,7 +25,19 @@ function show(req, res) {
     const post = arrayPosts.find(post => post.id === id)
 
     // Lo restituisco in formato JSON
-    res.json(post)
+    
+
+    if (!post) {
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not Found",
+            message: " Post non trovato"
+        })
+    } else {
+        res.json(post)
+    }
 }
 
 function store(req, res) {
@@ -49,7 +61,7 @@ function destroy(req, res) {
     // Cerco il post tramite ID
     const post = arrayPosts.find(post => post.id === id)
 
-    /* if (!post) {
+    if (!post) {
         res.status(404)
 
         return res.json({
@@ -57,11 +69,8 @@ function destroy(req, res) {
             error: "Not Found",
             message: " Post non trovato"
         })
-    } */
-
-
-    if (post) {
-        res.status(204)       
+    } else {
+        res.status(204)
     }
 
     // Rimuovo la pizza dall'array
