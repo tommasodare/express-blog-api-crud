@@ -1,35 +1,24 @@
 const express = require('express')
 const router = express.Router()
-const arrayPosts = require('../data/posts_array')
+const pizzaController = require('../controllers/postsController')
 
 // Index
-router.get('/', (req, res) => {
-    res.json(arrayPosts)
-})
+router.get('/', pizzaController.index)
 
 // Show
-router.get('/:id', (req, res) => {
-    res.json(arrayPosts[req.params.id - 1])
-})
+router.get('/:id', pizzaController.show)
 
 // Create
-router.post('/', (req, res) => {
-    res.send("Create new post")
-})
+router.post('/', pizzaController.store)
 
 // Update
-router.put('/:id', (req, res) => {
-    res.send(`Update the post with id: ${req.params.id}`)
-})
+router.put('/:id', pizzaController.update)
 
 // Modify
-router.patch('/:id', (req, res) => {
-    res.send(`Modify the post with id: ${req.params.id}`)
-})
+router.patch('/:id', pizzaController.modify)
 
 // Destroy
-router.delete('/:id', (req, res) => {
-    res.send(`Delete post with id: ${req.params.id}`)
-})
+router.delete('/:id', pizzaController.destroy)
+
 
 module.exports = router
