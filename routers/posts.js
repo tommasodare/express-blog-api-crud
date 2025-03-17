@@ -1,24 +1,24 @@
 const express = require('express')
 const router = express.Router()
-const pizzaController = require('../controllers/postsController')
+const postController = require('../controllers/postsController')
 
 // Index
-router.get('/', pizzaController.index)
+router.get('/', postController.index)
 
 // Show
-router.get('/:id', pizzaController.show)
+router.get('/:slug', postController.show)
 
 // Create
-router.post('/', pizzaController.store)
+router.post('/', postController.store)
 
 // Update
-router.put('/:id', pizzaController.update)
+router.put('/:slug', postController.update)
 
 // Modify
-router.patch('/:id', pizzaController.modify)
+router.patch('/:slug', postController.modify)
 
 // Destroy
-router.delete('/:id', pizzaController.destroy)
+router.delete('/:slug', postController.destroy)
 
 
 module.exports = router

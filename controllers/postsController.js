@@ -19,10 +19,10 @@ function show(req, res) {
     //res.json(arrayPosts[req.params.id - 1])
 
     // Recupero l'id dall'URL e lo trasformo in un numero
-    const id = Number(req.params.id)
+    const postSlug = req.params.slug
 
-    // Cerco il post tramite ID
-    const post = arrayPosts.find(post => post.id === id)
+    // Cerco il post tramite slug
+    const post = arrayPosts.find(post => post.slug === postSlug)
 
     // Lo restituisco in formato JSON
     
@@ -45,7 +45,7 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    res.send(`Update the post with id: ${req.params.id}`)
+    res.send(`Update the post with slug: ${req.params.id}`)
 }
 
 function modify(req, res) {
@@ -56,10 +56,10 @@ function destroy(req, res) {
     //res.send(`Delete post with id: ${req.params.id}`)
 
     //Recupero l'ID dall'URL e lo trasformo in numero
-    const id = Number(req.params.id)
+    const postSlug = req.params.slug
 
     // Cerco il post tramite ID
-    const post = arrayPosts.find(post => post.id === id)
+    const post = arrayPosts.find(post => post.slug === postSlug)
 
     if (!post) {
         res.status(404)
