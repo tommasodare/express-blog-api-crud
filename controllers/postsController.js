@@ -43,6 +43,26 @@ function show(req, res) {
 function store(req, res) {
     //res.send("Create new post")
     console.log(req.body);
+
+    // Creo un nuovo oggetto post
+    const newPost = {
+        title: req.body.title,
+        slug: req.body.slug,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags 
+    }
+
+    // Aggiugiamo il nuovo post all'arrayPosts
+    arrayPosts.push(newPost)
+
+    // Loggiamo in console
+    console.log(arrayPosts);
+    
+    // Restituisco lo status corretto e il post appena creato
+    res.status(201)
+    res.send(newPost)
+
 }
 
 function update(req, res) {
