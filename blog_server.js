@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 const port = 3000
+
+// Inserimento body-parser
+app.use(express.json())
+
 const postsRouter = require('./routers/posts')
 
 app.get('/', (req, res) => {

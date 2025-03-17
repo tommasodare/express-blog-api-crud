@@ -41,7 +41,8 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send("Create new post")
+    //res.send("Create new post")
+    console.log(req.body);
 }
 
 function update(req, res) {
