@@ -80,6 +80,55 @@ function update(req, res) {
     // Creo un nuovo slug utilizzando il titolo fornito dall'utente
     const newSlug = req.body.title.replaceAll(" ", "-")
 
+    if(!post) { // Se il post cercato non esiste
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not Found",
+            message: " Post non trovato"
+        })
+    } else {
+        // Restituisco il post appena creato
+        res.json(post)
+    }
+
+    // Aggiorno il post
+    post.title = req.body.title
+    post.slug = newSlug.toLowerCase()
+    post.content = req.body.content
+    post.image = req.body.image
+    post.tags = req.body.tags
+
+    console.log(arrayPosts);
+
+}
+
+function modify(req, res) {
+    //res.send(`Modify the post with id: ${req.params.id}`)
+
+    // Recupero lo slug dall'URL
+    const postSlug = req.params.slug
+
+    // Cerco il post tramite lo slug
+    const post = arrayPosts.find(post => post.slug === postSlug)
+
+    // Creo un nuovo slug utilizzando il titolo fornito dall'utente
+    const newSlug = req.body.title.replaceAll(" ", "-")
+
+    if(!post) { // Se il post cercato non esiste
+        res.status(404)
+
+        return res.json({
+            status: 404,
+            error: "Not Found",
+            message: " Post non trovato"
+        })
+    } else {
+        // Restituisco il post appena creato
+        res.json(post)
+    }
+
     // Aggiorno il post
     post.title = req.body.title
     post.slug = newSlug.toLowerCase()
@@ -91,11 +140,6 @@ function update(req, res) {
 
     // Restituisco il post appena creato
     res.json(post)
-
-}
-
-function modify(req, res) {
-    res.send(`Modify the post with id: ${req.params.id}`)
 }
 
 function destroy(req, res) {
