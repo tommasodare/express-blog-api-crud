@@ -18,14 +18,14 @@ function index(req, res) {
 function show(req, res) {
     //res.json(arrayPosts[req.params.id - 1])
 
-    // Recupero l'id dall'URL e lo trasformo in un numero
+    // Recupero l'id dall'URL
     const postSlug = req.params.slug
 
     // Cerco il post tramite slug
     const post = arrayPosts.find(post => post.slug === postSlug)
 
     // Lo restituisco in formato JSON
-    
+
 
     if (!post) {
         res.status(404)
@@ -42,15 +42,18 @@ function show(req, res) {
 
 function store(req, res) {
     //res.send("Create new post")
-    console.log(req.body);
+    //console.log(req.body);
+
+    // Creo un nuovo slug utilizzando il titolo fornito dall'utente
+    const newSlug = req.body.title.replaceAll(" ", "-")
 
     // Creo un nuovo oggetto post
     const newPost = {
         title: req.body.title,
-        slug: req.body.slug,
+        slug: newSlug.toLowerCase(),
         content: req.body.content,
         image: req.body.image,
-        tags: req.body.tags 
+        tags: req.body.tags
     }
 
     // Aggiugiamo il nuovo post all'arrayPosts
@@ -58,7 +61,7 @@ function store(req, res) {
 
     // Loggiamo in console
     console.log(arrayPosts);
-    
+
     // Restituisco lo status corretto e il post appena creato
     res.status(201)
     res.send(newPost)
@@ -66,7 +69,29 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    res.send(`Update the post with slug: ${req.params.id}`)
+    //res.send(`Update the post with slug: ${req.params.id}`)
+
+    // Recupero lo slug dall'URL
+    const postSlug = req.params.slug
+
+    // Cerco il post tramite lo slug
+    const post = arrayPosts.find(post => post.slug === postSlug)
+
+    // Creo un nuovo slug utilizzando il titolo fornito dall'utente
+    const newSlug = req.body.title.replaceAll(" ", "-")
+
+    // Aggiorno il post
+    post.title = req.body.title
+    post.slug = newSlug.toLowerCase()
+    post.content = req.body.content
+    post.image = req.body.image
+    post.tags = req.body.tags
+
+    console.log(arrayPosts);
+
+    // Restituisco il post appena creato
+    res.json(post)
+
 }
 
 function modify(req, res) {
