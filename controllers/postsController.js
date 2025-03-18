@@ -63,8 +63,7 @@ function store(req, res) {
     console.log(arrayPosts);
 
     // Restituisco lo status corretto e il post appena creato
-    res.status(201)
-    res.send(newPost)
+    res.status(201).send(newPost)
 
 }
 
@@ -80,7 +79,7 @@ function update(req, res) {
     // Creo un nuovo slug utilizzando il titolo fornito dall'utente
     const newSlug = req.body.title.replaceAll(" ", "-")
 
-    if(!post) { // Se il post cercato non esiste
+    if (!post) { // Se il post cercato non esiste
         res.status(404)
 
         return res.json({
@@ -88,9 +87,7 @@ function update(req, res) {
             error: "Not Found",
             message: " Post non trovato"
         })
-    } else {
-        // Restituisco il post appena creato
-        res.json(post)
+        
     }
 
     // Aggiorno il post
@@ -100,7 +97,10 @@ function update(req, res) {
     post.image = req.body.image
     post.tags = req.body.tags
 
+
     console.log(arrayPosts);
+
+    res.json(post)
 
 }
 
@@ -116,7 +116,7 @@ function modify(req, res) {
     // Creo un nuovo slug utilizzando il titolo fornito dall'utente
     const newSlug = req.body.title.replaceAll(" ", "-")
 
-    if(!post) { // Se il post cercato non esiste
+    if (!post) { // Se il post cercato non esiste
         res.status(404)
 
         return res.json({
@@ -124,9 +124,7 @@ function modify(req, res) {
             error: "Not Found",
             message: " Post non trovato"
         })
-    } else {
-        // Restituisco il post appena creato
-        res.json(post)
+        
     }
 
     // Aggiorno il post
@@ -136,16 +134,16 @@ function modify(req, res) {
     post.image = req.body.image
     post.tags = req.body.tags
 
+
     console.log(arrayPosts);
 
-    // Restituisco il post appena creato
     res.json(post)
 }
 
 function destroy(req, res) {
     //res.send(`Delete post with id: ${req.params.id}`)
 
-    //Recupero l'ID dall'URL e lo trasformo in numero
+    //Recupero l'ID dall'URL
     const postSlug = req.params.slug
 
     // Cerco il post tramite ID
